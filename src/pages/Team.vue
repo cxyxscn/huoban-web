@@ -1,13 +1,15 @@
 <template>
-  队伍
+    <button @click="btn">按钮</button>
 </template>
 
-<script>
-export default {
-    name: "Team"
+<script lang="ts" setup>
+
+const btn = () => {
+    showToast('你好')
 }
+
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

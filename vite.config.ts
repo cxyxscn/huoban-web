@@ -15,4 +15,12 @@ export default defineConfig({
             resolvers: [VantResolver()],
         }),
     ],
+    css: {
+        // css预处理器
+        preprocessorOptions: {
+            less: {
+                charset: false,
+            },
+        },
+    }
 })
