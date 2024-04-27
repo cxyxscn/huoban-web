@@ -6,7 +6,6 @@
             @clear="searchTags"
     >
     </van-search>
-
     <van-divider content-position="left">已选标签</van-divider>
     <div class="tags-box">
         <div class="selected-box">
@@ -61,10 +60,12 @@ const searchTags = () => {
 }
 
 const selectTag = (item) => {
-    selectTags.value.add(item)
+    selectTags.value.push(item)
+    tagsList.value = tagsList.value.filter(it => it !== item)
 }
 const deleteTag = (item) => {
-    selectTags.value.delete(item)
+    selectTags.value = selectTags.value.filter(it => it !== item)
+    tagsList.value.push(item)
 }
 
 const search = () => {
@@ -82,7 +83,7 @@ const search = () => {
 }
 
 const keyword = ref('')
-const selectTags = ref(new Set())
+const selectTags = ref([])
 const tagsList = ref([])
 
 </script>

@@ -7,11 +7,14 @@
                 border
         >
             <template #left>
-
             </template>
+
             <template #right>
                 <template v-if="router.currentRoute.value.path==='/home'">
                     <van-icon name="search" @click="router.push('/search')"/>
+                </template>
+                <template v-if="router.currentRoute.value.path==='/team'">
+                    <van-icon name="plus" @click="router.push('/team/add')"/>
                 </template>
             </template>
         </van-nav-bar>
@@ -32,8 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onBeforeUpdate, ref} from "vue";
 import {useRouter} from "vue-router";
+
+onBeforeUpdate(() => {
+    const path = router.currentRoute.value.path
+    if (path === "/") {
+        active.value = "home"
+    } else {
+        active.value = path.replace("/", "")
+    }
+})
 
 const router = useRouter()
 

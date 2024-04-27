@@ -1,13 +1,12 @@
 <template>
-    <template v-if="user">
-        <van-cell title="用户昵称" :value="user.username"/>
+    <template v-if="user !== undefined">
+        <van-cell title="用户昵称" :value="user.nickname"/>
         <van-cell title="个性签名" :value="user.signature"/>
         <van-cell title="用户账号" :value="user.userAccount"/>
         <van-cell title="用户性别">
             <template #value>
-                <van-tag type="primary" :color="user.gender === 0 ? 'primary' : 'red'">
-                    {{ user.gender === 0 ? '男' : '女' }}
-                </van-tag>
+                <van-tag v-if="user.gender===0" type="primary" color="primary">男</van-tag>
+                <van-tag v-if="user.gender===1" type="primary" color="red">女</van-tag>
             </template>
         </van-cell>
         <van-cell
@@ -15,7 +14,7 @@
                 is-link
                 @click="router.push('/user/tag')"
         >
-            <template v-for="(tag,index) in user.tags.split(',')" :key="index">
+            <template v-for="(tag,index) in user.tags" :key="index">
                 <van-tag type="primary" plain style="margin: 2px">
                     {{ tag }}
                 </van-tag>
@@ -43,7 +42,7 @@ import {onMounted, ref} from "vue";
 import {getCurrentUserApi, logoutApi} from "../api/user.ts";
 
 const router = useRouter();
-const user = ref()
+const user = ref({})
 
 onMounted(() => {
     getCurrentUser()

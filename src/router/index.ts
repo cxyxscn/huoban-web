@@ -1,21 +1,23 @@
 import {createRouter, createWebHistory} from 'vue-router'
 // @ts-ignore
-import Home from "../pages/Home.vue";
+import Home from "../pages/Home.vue"
 // @ts-ignore
-import Team from "../pages/Team.vue";
+import Team from "../pages/Team.vue"
 // @ts-ignore
-import User from "../pages/User.vue";
+import User from "../pages/User.vue"
 // @ts-ignore
-import Search from "../pages/Search.vue";
+import Search from "../pages/Search.vue"
 // @ts-ignore
-import Login from "../pages/Login.vue";
+import Login from "../pages/Login.vue"
 // @ts-ignore
-import Register from "../pages/Register.vue";
-import {getCurrentUserApi} from "../api/user.ts";
+import Register from "../pages/Register.vue"
+import {getCurrentUserApi} from "../api/user.ts"
 // @ts-ignore
-import UserUpp from "../pages/UserUpp.vue";
+import UserUpp from "../pages/UserUpp.vue"
 // @ts-ignore
-import UserTag from "../pages/UserTag.vue";
+import UserTag from "../pages/UserTag.vue"
+// @ts-ignore
+import TeamAdd from "../pages/TeamAdd.vue"
 
 const routes = [
     {
@@ -52,6 +54,14 @@ const routes = [
         meta: {
             title: '队伍',
             layout: true,
+        }
+    },
+    {
+        path: '/team/add',
+        component: TeamAdd,
+        meta: {
+            title: '创建队伍',
+            layout: false,
         }
     },
     {

@@ -1,8 +1,8 @@
-import myAxios from "../utils/myAxios.ts";
+import myAxios from "../utils/myAxios.ts"
 
 const path = "/user"
-export const getUsersApi = (tags: string) => {
-    return myAxios.get(`${path}/search/users?tags=${tags}`)
+export const getUsersApi = (pageNum: number, pageSize: number, tags: string) => {
+    return myAxios.get(`${path}/search/users?pageNum=${pageNum}&pageSize=${pageSize}&tags=${tags}`)
 }
 
 export const getTagsApi = (keyword: string) => {
@@ -14,11 +14,11 @@ export const getCurrentUserApi = () => {
 }
 
 export const updateUserByIdApi = (data: object) => {
-    return myAxios.post(`${path}/upp/uid`,data)
+    return myAxios.post(`${path}/upp/uid`, data)
 }
 
 export const updateUserTagsByUidApi = (data: object) => {
-    return myAxios.post(`${path}/upp/tags/uid`,data)
+    return myAxios.post(`${path}/upp/tags/uid`, data)
 }
 
 export const loginApi = (data: object) => {

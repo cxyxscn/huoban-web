@@ -50,7 +50,7 @@ import {getCurrentUserApi, getTagsApi, updateUserTagsByUidApi} from "../api/user
 
 const router = useRouter()
 
-const selectTags = ref(new Set())
+const selectTags = ref([])
 const tagsList = ref([])
 
 onMounted(() => {
@@ -66,19 +66,16 @@ const getTags = () => {
 
 const getUserTags = () => {
     getCurrentUserApi().then(res => {
-        const arr = res.data.tags.split(',')
-        for (let i = 0; i < arr.length; i++) {
-            selectTags.value.add(arr[i])
-        }
+        selectTags.value = res.data.tags
     })
 }
 
 const selectTag = (item) => {
-    selectTags.value.add(item)
+    selectTags.value.push(item)
 }
 
 const deleteTag = (item) => {
-    selectTags.value.delete(item)
+    selectTags.value = selectTags.value.filter(it => it !== item)
 }
 
 const submit = () => {

@@ -46,7 +46,7 @@ const onSubmit = () => {
     }).then(res => {
         if (res.code === 0) {
             showToast('登录成功');
-            router.push('/user')
+            router.push('/home')
         } else {
             showToast('登录失败')
         }

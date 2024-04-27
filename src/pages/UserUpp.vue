@@ -1,9 +1,9 @@
 <template>
     <van-form @submit="onSubmit">
         <van-field
-                v-model="user.username"
+                v-model="user.nickname"
                 label="用户昵称"
-                name="username"
+                name="nickname"
                 placeholder="请输入用户昵称"
                 :rules="[{ required: true, message: '请输入用户昵称' }]"
         />
