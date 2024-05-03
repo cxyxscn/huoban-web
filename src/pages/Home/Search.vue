@@ -2,7 +2,7 @@
     <van-search
             v-model="keyword"
             placeholder="请输入搜索的标签"
-            @search="searchTags"
+            @change="searchTags"
             @clear="searchTags"
     >
     </van-search>
@@ -17,7 +17,7 @@
                     :key="index"
                     @close="deleteTag(item)"
             >
-                {{ item }}
+                {{ item.name }}
             </van-tag>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     :key="index"
                     @click="selectTag(item)"
             >
-                {{ item }}
+                {{ item.name }}
             </van-tag>
         </div>
     </div>
@@ -44,17 +44,23 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {getTagsApi} from "../api/user.ts";
 import {useRouter} from "vue-router";
+import {searchTagsApi} from "../../api/tag.ts";
 
 const router = useRouter()
+
+const keyword = ref('')
+
+const selectTags = ref([])
+
+const tagsList = ref([])
 
 onMounted(() => {
     searchTags()
 })
 
 const searchTags = () => {
-    getTagsApi(keyword.value).then(res => {
+    searchTagsApi(keyword.value).then(res => {
         tagsList.value = res.data
     })
 }
@@ -69,22 +75,20 @@ const deleteTag = (item) => {
 }
 
 const search = () => {
-    const arr = [...selectTags.value]
+    const arr = selectTags.value.map(item => item.id)
     if (arr.length == 0) {
         router.push('/home')
     } else {
+
         router.push({
             path: '/home',
             query: {
-                tags: arr.join(',').replace(",", "&")
+                tags: arr.join()
             }
         })
     }
 }
 
-const keyword = ref('')
-const selectTags = ref([])
-const tagsList = ref([])
 
 </script>
 

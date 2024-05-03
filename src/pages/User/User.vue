@@ -1,8 +1,18 @@
 <template>
     <template v-if="user !== undefined">
         <van-cell title="用户昵称" :value="user.nickname"/>
-        <van-cell title="个性签名" :value="user.signature"/>
-        <van-cell title="用户账号" :value="user.userAccount"/>
+        <van-cell title="用户头像" :style="{display:'flex',alignItems:'center',height:'80px'}">
+            <template #value>
+                <van-image
+                        style="margin-top: 5px"
+                        v-if="user.avatar"
+                        width="70"
+                        height="70"
+                        :src="'/api/'+user.avatar"
+                />
+            </template>
+        </van-cell>
+        <van-cell title="用户账号" :value="user.account"/>
         <van-cell title="用户性别">
             <template #value>
                 <van-tag v-if="user.gender===0" type="primary" color="primary">男</van-tag>
@@ -11,8 +21,6 @@
         </van-cell>
         <van-cell
                 title="用户标签"
-                is-link
-                @click="router.push('/user/tag')"
         >
             <template v-for="(tag,index) in user.tags" :key="index">
                 <van-tag type="primary" plain style="margin: 2px">
@@ -27,7 +35,7 @@
         <div style="margin: 16px;">
             <van-button type="primary" round block
                         style="margin-bottom: 10px"
-                        @click="router.push('/user/upp')"
+                        @click="router.push('/user/update')"
             >
                 修改资料
             </van-button>
@@ -39,7 +47,7 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
-import {getCurrentUserApi, logoutApi} from "../api/user.ts";
+import {getCurrentUserApi, logoutApi} from "../../api/system.ts";
 
 const router = useRouter();
 const user = ref({})
@@ -50,7 +58,7 @@ onMounted(() => {
 
 const getCurrentUser = () => {
     getCurrentUserApi().then(res => {
-        if (res.code === 0) {
+        if (res.code === 200) {
             user.value = res.data
         }
     })
@@ -58,7 +66,7 @@ const getCurrentUser = () => {
 
 const logout = () => {
     logoutApi().then(res => {
-        if (res.code === 0) {
+        if (res.code === 200) {
             router.push("/login")
         }
     })

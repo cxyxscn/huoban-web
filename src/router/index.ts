@@ -1,23 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
-// @ts-ignore
-import Home from "../pages/Home.vue"
-// @ts-ignore
-import Team from "../pages/Team.vue"
-// @ts-ignore
-import User from "../pages/User.vue"
-// @ts-ignore
-import Search from "../pages/Search.vue"
-// @ts-ignore
-import Login from "../pages/Login.vue"
-// @ts-ignore
-import Register from "../pages/Register.vue"
-import {getCurrentUserApi} from "../api/user.ts"
-// @ts-ignore
-import UserUpp from "../pages/UserUpp.vue"
-// @ts-ignore
-import UserTag from "../pages/UserTag.vue"
-// @ts-ignore
-import TeamAdd from "../pages/TeamAdd.vue"
+import Home from "../pages/Home/Home.vue"
+import Team from "../pages/Team/Team.vue"
+import User from "../pages/User/User.vue"
+import Search from "../pages/Home/Search.vue"
+import Login from "../pages/System/Login.vue"
+import Register from "../pages/System/Register.vue"
+import {getCurrentUserApi} from "../api/system.ts"
+import UserUpdate from "../pages/User/Update.vue"
+import TeamAdd from "../pages/Team/Add.vue"
+import TeamSearch from "../pages/Team/Search.vue"
+import TeamDetail from "../pages/Team/Detail.vue"
+import TeamEdite from "../pages/Team/Edite.vue"
+import Recommend from "../pages/Home/Recommend.vue";
 
 const routes = [
     {
@@ -30,6 +24,14 @@ const routes = [
         meta: {
             title: '首页',
             layout: true,
+        }
+    },
+    {
+        path: '/recommend',
+        component: Recommend,
+        meta: {
+            title: '匹配模式',
+            layout: false,
         }
     },
     {
@@ -57,10 +59,34 @@ const routes = [
         }
     },
     {
+        path: '/team/detail/:id',
+        component: TeamDetail,
+        meta: {
+            title: '队伍详细',
+            layout: true,
+        }
+    },
+    {
+        path: '/team/edite/:id',
+        component: TeamEdite,
+        meta: {
+            title: '编辑队伍',
+            layout: true,
+        }
+    },
+    {
         path: '/team/add',
         component: TeamAdd,
         meta: {
             title: '创建队伍',
+            layout: false,
+        }
+    },
+    {
+        path: '/team/search',
+        component: TeamSearch,
+        meta: {
+            title: '搜索队伍',
             layout: false,
         }
     },
@@ -73,18 +99,10 @@ const routes = [
         },
     },
     {
-        path: '/user/upp',
-        component: UserUpp,
+        path: '/user/update',
+        component: UserUpdate,
         meta: {
             title: '修改资料',
-            layout: false,
-        },
-    },
-    {
-        path: '/user/tag',
-        component: UserTag,
-        meta: {
-            title: '修改标签',
             layout: false,
         },
     },
@@ -108,8 +126,7 @@ router.beforeEach((to, from, next) => {
     // 获取用户信息
     getCurrentUserApi().then(res => {
         // 如果用户已经登录（通过Vuex状态管理获取）
-        // @ts-ignore
-        if (res.code === 0) {
+        if (res.code === 200) {
             // 如果试图访问的是无需权限的公共路由，则直接跳转
             if (isPublicRoute) {
                 next({path: '/home'});
@@ -118,8 +135,6 @@ router.beforeEach((to, from, next) => {
                 next();
             }
         } else {
-            // 如果用户未登录
-            showToast('未登录')
             if (isPublicRoute) {
                 // 允许访问登录和注册页
                 next();

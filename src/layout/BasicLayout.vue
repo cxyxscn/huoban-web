@@ -7,6 +7,41 @@
                 border
         >
             <template #left>
+                <template v-if="router.currentRoute.value.path==='/home'">
+                    <van-icon name="like-o" @click="router.push('/recommend')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/team'">
+                    <van-icon name="plus" @click="router.push('/team/add')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/search'">
+                    <van-icon name="arrow-left" @click="router.push('/home')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/team/add'">
+                    <van-icon name="arrow-left" @click="router.push('/team')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/team/search'">
+                    <van-icon name="arrow-left" @click="router.push('/team')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/team/edite'">
+                    <van-icon name="arrow-left" @click="router.push('/team')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/team/detail'">
+                    <van-icon name="arrow-left" @click="router.push('/team')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/user/update'">
+                    <van-icon name="arrow-left" @click="router.push('/user')"/>
+                </template>
+
+                <template v-if="router.currentRoute.value.path==='/recommend'">
+                    <van-icon name="arrow-left" @click="router.push('/')"/>
+                </template>
             </template>
 
             <template #right>
@@ -14,7 +49,7 @@
                     <van-icon name="search" @click="router.push('/search')"/>
                 </template>
                 <template v-if="router.currentRoute.value.path==='/team'">
-                    <van-icon name="plus" @click="router.push('/team/add')"/>
+                    <van-icon name="search" @click="router.push('/team/search')"/>
                 </template>
             </template>
         </van-nav-bar>
@@ -31,12 +66,14 @@
             <van-tabbar-item to="/user" icon="user-o" name="user">我的</van-tabbar-item>
         </van-tabbar>
     </div>
-
 </template>
 
 <script setup lang="ts">
-import {onBeforeUpdate, ref} from "vue";
-import {useRouter} from "vue-router";
+import {onBeforeUpdate, ref} from "vue"
+import {useRouter} from "vue-router"
+
+const router = useRouter()
+const active = ref("home")
 
 onBeforeUpdate(() => {
     const path = router.currentRoute.value.path
@@ -46,10 +83,6 @@ onBeforeUpdate(() => {
         active.value = path.replace("/", "")
     }
 })
-
-const router = useRouter()
-
-const active = ref("home")
 
 </script>
 

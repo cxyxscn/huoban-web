@@ -2,16 +2,16 @@
     <van-form @submit="onSubmit">
         <van-cell-group inset>
             <van-field
-                    v-model="userAccount"
-                    name="userAccount"
+                    v-model="account"
+                    name="account"
                     label="账号"
                     placeholder="请输入账号"
                     :rules="[{ required: true, message: '请填写用户名' }]"
             />
             <van-field
-                    v-model="userPassword"
+                    v-model="password"
                     type="password"
-                    name="userPassword"
+                    name="password"
                     label="密码"
                     placeholder="请输入密码"
                     :rules="[{ required: true, message: '请填写密码' }]"
@@ -33,22 +33,22 @@
 <script lang="ts" setup>
 import {useRouter} from "vue-router";
 import {ref} from "vue";
-import {loginApi} from "../api/user.ts";
+import {loginApi} from "../../api/system.ts";
 
 const router = useRouter();
-const userAccount = ref('');
-const userPassword = ref('');
+const account = ref('');
+const password = ref('');
 
 const onSubmit = () => {
     loginApi({
-        userAccount: userAccount.value,
-        userPassword: userPassword.value,
+        account: account.value,
+        password: password.value,
     }).then(res => {
-        if (res.code === 0) {
-            showToast('登录成功');
-            router.push('/home')
+        if (res.code === 200) {
+            showToast('登录成功')
+            router.push('/')
         } else {
-            showToast('登录失败')
+            showToast(res.msg)
         }
     })
 };
