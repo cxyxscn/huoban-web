@@ -37,14 +37,14 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router"
 import {getTeamApi, teamQuitApi} from "../../api/team.ts"
 
 const route = useRoute()
 const teamId = route.params.id
-const team = ref()
+const team = ref<teamType>()
 const router = useRouter()
 onMounted(() => {
     getTeam()
@@ -60,7 +60,7 @@ const quitTeam = () => {
         if (res.code === 200) {
             showToast('退出成功')
             router.push('/team')
-        }else {
+        } else {
             showToast(res.msg)
         }
     })

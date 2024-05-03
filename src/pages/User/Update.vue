@@ -146,11 +146,13 @@ const updateTags = () => {
 }
 
 const updateAvatar = () => {
+    // @ts-ignore
     currentInstance.ctx.$refs.file.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
+    // @ts-ignore
     let file = currentInstance.ctx.$refs.file.files[0]
     formData.append("file", file);
     uploadApi(formData).then(res => {

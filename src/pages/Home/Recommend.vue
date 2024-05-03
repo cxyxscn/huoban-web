@@ -27,15 +27,19 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {recommendApi} from "../../api/user.ts"
 import {onMounted, ref} from "vue"
 
-const userList = ref()
+const userList = ref<userType[]>([])
+const showBox = ref(false)
+const contactData = ref({phone: '', email: ''})
 
 onMounted(() => {
     getRecommendUsers()
 })
+
+
 
 const getRecommendUsers = () => {
     recommendApi().then(res => {
@@ -44,20 +48,26 @@ const getRecommendUsers = () => {
         }
     })
 }
+
+const contact = (item) => {
+    showBox.value = true
+    contactData.value.phone = item.phone
+    contactData.value.email = item.email
+}
 </script>
 
 <style lang="less" scoped>
 .user_info {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 
-    .title {
-        font-size: 20px;
-        font-weight: 700;
-        padding: 0 10px 5px 0;
-    }
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0 10px 5px 0;
+  }
 
-    .van-tag {
-        margin: 5px 10px 5px 0;
-    }
+  .van-tag {
+    margin: 5px 10px 5px 0;
+  }
 }
 </style>

@@ -81,7 +81,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {getCurrentInstance, ref} from "vue"
 import {uploadApi} from "../../api/system.ts"
 import {teamAddApi} from "../../api/team.ts"
@@ -91,11 +91,13 @@ const router = useRouter()
 const currentInstance = getCurrentInstance()
 const team = ref({})
 const updateCover = () => {
+    //@ts-ignore
     currentInstance.ctx.$refs.file.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
+    //@ts-ignore
     let file = currentInstance.ctx.$refs.file.files[0]
     formData.append("file", file);
     uploadApi(formData).then(res => {

@@ -1,17 +1,30 @@
 import {createRouter, createWebHistory} from 'vue-router'
+// @ts-ignore
 import Home from "../pages/Home/Home.vue"
+// @ts-ignore
 import Team from "../pages/Team/Team.vue"
+// @ts-ignore
 import User from "../pages/User/User.vue"
+// @ts-ignore
 import Search from "../pages/Home/Search.vue"
+// @ts-ignore
 import Login from "../pages/System/Login.vue"
+// @ts-ignore
 import Register from "../pages/System/Register.vue"
+// @ts-ignore
 import {getCurrentUserApi} from "../api/system.ts"
+// @ts-ignore
 import UserUpdate from "../pages/User/Update.vue"
+// @ts-ignore
 import TeamAdd from "../pages/Team/Add.vue"
+// @ts-ignore
 import TeamSearch from "../pages/Team/Search.vue"
+// @ts-ignore
 import TeamDetail from "../pages/Team/Detail.vue"
+// @ts-ignore
 import TeamEdite from "../pages/Team/Edite.vue"
-import Recommend from "../pages/Home/Recommend.vue";
+// @ts-ignore
+import Recommend from "../pages/Home/Recommend.vue"
 
 const routes = [
     {
@@ -126,6 +139,7 @@ router.beforeEach((to, from, next) => {
     // 获取用户信息
     getCurrentUserApi().then(res => {
         // 如果用户已经登录（通过Vuex状态管理获取）
+        // @ts-ignore
         if (res.code === 200) {
             // 如果试图访问的是无需权限的公共路由，则直接跳转
             if (isPublicRoute) {

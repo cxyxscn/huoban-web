@@ -1,6 +1,5 @@
 //自定义实例默认值
 import axios from "axios";
-import router from "../router";
 
 const myAxios = axios.create()
 

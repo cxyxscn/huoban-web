@@ -84,7 +84,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {getCurrentInstance, onMounted, ref} from "vue"
 import {useRoute, useRouter} from "vue-router"
 import {getTeamApi, teamUpdateApi} from "../../api/team.ts";
@@ -101,11 +101,13 @@ onMounted(() => {
 })
 
 const updateCover = () => {
+    // @ts-ignore
     currentInstance.ctx.$refs.file.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
+    // @ts-ignore
     let file = currentInstance.ctx.$refs.file.files[0]
     formData.append("file", file);
     uploadApi(formData).then(res => {
