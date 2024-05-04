@@ -44,12 +44,8 @@ const onSubmit = () => {
         account: account.value,
         password: password.value,
     }).then(res => {
-        if (res.code === 200) {
-            showToast('登录成功')
-            router.push('/')
-        } else {
-            showToast(res.msg)
-        }
+        showToast('登录成功')
+        router.push('/')
     })
 };
 </script>

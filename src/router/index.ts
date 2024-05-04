@@ -133,32 +133,26 @@ const router = createRouter({
     routes,
 })
 
-// @ts-ignore
-router.beforeEach((to, from, next) => {
-    const isPublicRoute = to.path === '/login' || to.path === '/register';
-    // 获取用户信息
-    getCurrentUserApi().then(res => {
-        // 如果用户已经登录（通过Vuex状态管理获取）
-        // @ts-ignore
-        if (res.code === 200) {
-            // 如果试图访问的是无需权限的公共路由，则直接跳转
-            if (isPublicRoute) {
-                next({path: '/home'});
-            } else {
-                // 否则，如果访问的是需要权限的路由，则继续导航
-                next();
-            }
+router.beforeEach(async (to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title as string
+    }
+    const res = await getCurrentUserApi();
+    if (res.code === 200) {
+        // 登录成功
+        if (to.path === '/login' || to.path === '/register') {
+            next('/home')
         } else {
-            if (isPublicRoute) {
-                // 允许访问登录和注册页
-                next();
-            } else {
-                // 否则重定向到登录页
-                next('/login');
-            }
+            next()
         }
-    })
+    } else {
+        // 未登录
+        if (to.path === '/login' || to.path === '/register') {
+            next()
+        } else {
+            next('/login')
+        }
+    }
 })
-
 
 export default router

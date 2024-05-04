@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <template v-for="(item,index) in userList" :key="index">
+        <template v-for="item in userList" :key="item.id">
             <van-card class="user_info">
                 <template #title>
                     <div class="title">{{ item.nickname }}</div>
@@ -43,9 +43,7 @@ onMounted(() => {
 
 const getRecommendUsers = () => {
     recommendApi().then(res => {
-        if (res.code === 200) {
-            userList.value = res.data
-        }
+        userList.value = res.data
     })
 }
 

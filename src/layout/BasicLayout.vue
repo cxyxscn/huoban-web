@@ -72,15 +72,19 @@
 import {onBeforeUpdate, ref} from "vue"
 import {useRouter} from "vue-router"
 
+
 const router = useRouter()
-const active = ref("home")
+const title = ref('')
+const path = ref('')
+
+const active = ref('home')
 
 onBeforeUpdate(() => {
     const path = router.currentRoute.value.path
-    if (path === "/") {
-        active.value = "home"
+    if (path === '/') {
+        active.value = 'home'
     } else {
-        active.value = path.replace("/", "")
+        active.value = path.replace('/', '')
     }
 })
 

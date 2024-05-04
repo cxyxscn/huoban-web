@@ -1,5 +1,5 @@
 //自定义实例默认值
-import axios from "axios";
+import axios from "axios"
 
 const myAxios = axios.create()
 
@@ -13,16 +13,26 @@ myAxios.interceptors.request.use(function (config) {
     return config;
 }, function (error) {
     // 对请求错误做些什么
-    return Promise.reject(error);
+    return Promise.reject(error)
 })
 
 // 添加响应拦截器
 myAxios.interceptors.response.use(function (response) {
-    // 对响应数据做点什么
-    return response.data
+    const res = response.data
+    if (res.code === 200) {
+        // 对响应数据做点什么
+        return res
+    } else {
+        if (res.code === 406) {
+            showToast('登录过期，请重新登录')
+            return res
+        }
+        showToast(res.msg)
+        return Promise.reject(res.msg)
+    }
 }, function (error) {
     // 对响应错误做点什么
-    return Promise.reject(error);
+    return Promise.reject(error)
 })
 
 export default myAxios

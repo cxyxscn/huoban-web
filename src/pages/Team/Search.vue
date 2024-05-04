@@ -1,10 +1,12 @@
 <template>
-    <van-search
-            v-model="keyword"
-            placeholder="请输入搜索关键词"
-            @search="onSearch"
-            @clear="onClear"
-    />
+  <div class="app-container">
+      <van-search
+          v-model="keyword"
+          placeholder="请输入搜索关键词"
+          @search="onSearch"
+          @clear="onClear"
+      />
+  </div>
 </template>
 
 <script setup lang="ts">

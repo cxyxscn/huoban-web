@@ -1,6 +1,6 @@
 interface userType {
     id: number,
-    username: string,
+    account: string,
     password: string,
     nickname: string,
     avatar: string,

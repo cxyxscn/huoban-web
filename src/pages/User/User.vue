@@ -1,5 +1,5 @@
 <template>
-    <template v-if="user !== undefined">
+    <div class="app-container">
         <van-cell title="用户昵称" :value="user.nickname"/>
         <van-cell title="用户头像" :style="{display:'flex',alignItems:'center',height:'80px'}">
             <template #value>
@@ -41,7 +41,7 @@
             </van-button>
             <van-button type="danger" round block @click="logout">退出登录</van-button>
         </div>
-    </template>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -66,9 +66,7 @@ const getCurrentUser = () => {
 
 const logout = () => {
     logoutApi().then(res => {
-        if (res.code === 200) {
-            router.push("/login")
-        }
+        router.push("/login")
     })
 }
 </script>

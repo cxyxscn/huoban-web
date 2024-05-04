@@ -1,45 +1,47 @@
 <template>
-    <van-empty description="空列表" v-show="userList && userList.length === 0"/>
-    <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="userPage"
-    >
-        <template v-for="(item, index) in userList" :key="index">
-            <van-card class="user_info">
-                <template #title>
-                    <div class="title">{{ item.nickname }}</div>
-                </template>
-                <template #thumb>
-                    <van-image :src="'/api' + item.avatar"></van-image>
-                </template>
-                <template #tags>
-                    <template v-for="(tag, index) in item.tags" :key="index">
-                        <van-tag
-                                plain size="large"
-                                type="primary"
-                                :color="item.gender===0?'primary':'red'"
-                        >
-                            {{ tag }}
-                        </van-tag>
+    <div class="app-container">
+        <van-empty description="空列表" v-show="userList.length === 0"/>
+        <van-list
+                v-model:loading="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="userPage"
+        >
+            <template v-for="item in userList" :key="item.id">
+                <van-card class="user_info">
+                    <template #title>
+                        <div class="title">{{ item.nickname ? item.nickname : '伙伴匹配用户' }}</div>
                     </template>
-                </template>
-                <template #footer>
-                    <van-button size="small" type="primary" plain @click="contact(item)">立即联系</van-button>
-                </template>
-            </van-card>
-        </template>
-    </van-list>
+                    <template #thumb>
+                        <van-image :src="item.avatar?'/api' + item.avatar : '/api/images/avatar.png'"/>
+                    </template>
+                    <template #tags>
+                        <template v-for="(tag,index) in item.tags" :key="index">
+                            <van-tag
+                                    plain size="large"
+                                    type="primary"
+                                    :color="item.gender===0?'primary':'red'"
+                            >
+                                {{ tag }}
+                            </van-tag>
+                        </template>
+                    </template>
+                    <template #footer>
+                        <van-button size="small" type="primary" plain @click="contact(item)">立即联系</van-button>
+                    </template>
+                </van-card>
+            </template>
+        </van-list>
 
-    <van-popup
-            v-model:show="showBox"
-            position="center"
-            :style="{ width: '90%',padding:'10px',borderRadius:'5px' }"
-    >
-        <van-cell title="邮箱" :value="contactData.email"/>
-        <van-cell title="电话" :value="contactData.phone"/>
-    </van-popup>
+        <van-popup
+                v-model:show="showBox"
+                position="center"
+                :style="{ width: '90%',padding:'10px',borderRadius:'5px' }"
+        >
+            <van-cell title="邮箱" :value="contactData.email"/>
+            <van-cell title="电话" :value="contactData.phone"/>
+        </van-popup>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -65,14 +67,12 @@ onMounted(() => {
 const userPage = () => {
     if (loading.value) {
         userPageApi(pageNum.value, pageSize.value, tags).then(res => {
-            if (res.code === 200) {
-                loading.value = false
-                total.value = res.data.total
-                userList.value = [...userList.value, ...res.data.records]
-                pageNum.value = pageNum.value + 1
-                if (userList.value.length >= total.value) {
-                    finished.value = true
-                }
+            loading.value = false
+            total.value = res.data.total
+            userList.value = [...userList.value, ...res.data.records]
+            pageNum.value = pageNum.value + 1
+            if (userList.value.length >= total.value) {
+                finished.value = true
             }
         })
     }

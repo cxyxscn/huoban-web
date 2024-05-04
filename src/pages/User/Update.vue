@@ -17,7 +17,7 @@
                         v-if="user.avatar"
                         width="70"
                         height="70"
-                        :src="'/api/'+user.avatar"
+                        :src="'/api'+user.avatar"
                 />
                 <input type="file" ref="file" accept="image/*"
                        style="display: none;" @change.prevent="handleFileUpload">
@@ -114,12 +114,12 @@
 
 <script setup lang="ts">
 import {useRouter} from "vue-router"
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import {showToast} from "vant";
 import {getCurrentUserApi, uploadApi, userSettingApi} from "../../api/system.ts";
 
 const router = useRouter()
-
+const file =ref()
 const user = ref({})
 
 const columns = ref([
@@ -128,33 +128,27 @@ const columns = ref([
 ])
 
 const show = ref(false)
-
 const showPicker = ref(false)
-
 const fieldValue = ref('男生');
-
-const currentInstance = getCurrentInstance()
 
 onMounted(() => {
     getCurrentUser()
 })
 
-const tag = ref("")
+const tag = ref('')
 
 const updateTags = () => {
     show.value = true
 }
 
 const updateAvatar = () => {
-    // @ts-ignore
-    currentInstance.ctx.$refs.file.click()
+    file.value.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
-    // @ts-ignore
-    let file = currentInstance.ctx.$refs.file.files[0]
-    formData.append("file", file);
+
+    formData.append("file", file.value.files[0]);
     uploadApi(formData).then(res => {
         user.value.avatar = res.data.path
     })
@@ -187,13 +181,11 @@ const onConfirm = ({selectedOptions}) => {
 
 const getCurrentUser = () => {
     getCurrentUserApi().then(res => {
-        if (res.code === 200) {
-            user.value = res.data
-            if (user.value.gender === 0) {
-                fieldValue.value = '男生'
-            } else {
-                fieldValue.value = '女生'
-            }
+        user.value = res.data
+        if (user.value.gender === 0) {
+            fieldValue.value = '男生'
+        } else {
+            fieldValue.value = '女生'
         }
     })
 }

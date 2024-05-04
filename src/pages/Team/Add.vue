@@ -17,7 +17,7 @@
                         v-if="team.coverUrl"
                         width="70"
                         height="70"
-                        :src="'/api/'+team.coverUrl"
+                        :src="'/api'+team.coverUrl"
                 />
                 <input type="file" ref="file" accept="image/*"
                        style="display: none;" @change.prevent="handleFileUpload">
@@ -82,37 +82,44 @@
 </template>
 
 <script setup lang="ts">
-import {getCurrentInstance, ref} from "vue"
+import {ref} from "vue"
 import {uploadApi} from "../../api/system.ts"
 import {teamAddApi} from "../../api/team.ts"
 import {useRouter} from "vue-router"
 
 const router = useRouter()
-const currentInstance = getCurrentInstance()
-const team = ref({})
+const team = ref({
+    name: '',
+    description: '',
+    maxNum: null,
+    expireTime: '',
+    status: 0,
+    password: '',
+    coverUrl: '',
+})
+const file = ref()
+
 const updateCover = () => {
-    //@ts-ignore
-    currentInstance.ctx.$refs.file.click()
+    file.value.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
-    //@ts-ignore
-    let file = currentInstance.ctx.$refs.file.files[0]
-    formData.append("file", file);
+    formData.append("file", file.value.files[0]);
     uploadApi(formData).then(res => {
         team.value.coverUrl = res.data.path
     })
 }
 
 const onSubmit = () => {
-    team.value.expireTime = team.value.expireTime.replace('T', ' ') + ':00'
+    if (team.value.coverUrl === '') {
+        showToast('队伍封面不能为空')
+        return
+    }
     teamAddApi(team.value).then(res => {
-        if (res.code === 200) {
-            router.push({
-                path: '/team/list'
-            })
-        }
+        router.push({
+            path: '/team'
+        })
     })
 }
 </script>

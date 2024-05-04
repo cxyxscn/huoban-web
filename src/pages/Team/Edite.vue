@@ -1,5 +1,5 @@
 <template>
-    <div v-if="team">
+    <div class="app-container">
         <van-form @submit="onSubmit">
             <van-field
                     v-model="team.name"
@@ -18,10 +18,10 @@
                             v-if="team.coverUrl"
                             width="70"
                             height="70"
-                            :src="'/api/'+team.coverUrl"
+                            :src="'/api'+team.coverUrl"
                     />
                     <input type="file" ref="file" accept="image/*"
-                           style="display: none;" @change.prevent="handleFileUpload">
+                           hidden @change.prevent="handleFileUpload">
                 </template>
             </van-cell>
 
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import {getCurrentInstance, onMounted, ref} from "vue"
+import {onMounted, ref} from "vue"
 import {useRoute, useRouter} from "vue-router"
 import {getTeamApi, teamUpdateApi} from "../../api/team.ts";
 import {uploadApi} from "../../api/system.ts";
@@ -93,23 +93,20 @@ import {uploadApi} from "../../api/system.ts";
 const route = useRoute()
 const router = useRouter()
 const teamId = route.params.id
-const team = ref()
-const currentInstance = getCurrentInstance()
+const team = ref({})
+const file = ref()
 
 onMounted(() => {
     getTeam()
 })
 
 const updateCover = () => {
-    // @ts-ignore
-    currentInstance.ctx.$refs.file.click()
+    file.value.click()
 }
 
 const handleFileUpload = () => {
     let formData = new FormData()
-    // @ts-ignore
-    let file = currentInstance.ctx.$refs.file.files[0]
-    formData.append("file", file);
+    formData.append("file", file.value.files[0]);
     uploadApi(formData).then(res => {
         team.value.coverUrl = res.data.path
     })
@@ -118,18 +115,13 @@ const handleFileUpload = () => {
 const getTeam = () => {
     getTeamApi(teamId).then(res => {
         team.value = res.data
-        team.value.expireTime = team.value.expireTime.replace(' ', 'T').slice(0, 16)
+        team.value.expireTime = new Date(team.value.expireTime).toISOString().slice(0, 16)
     })
 }
 const onSubmit = () => {
-    team.value.expireTime = team.value.expireTime.replace('T', ' ') + ':00'
     teamUpdateApi(team.value).then(res => {
-        if (res.code === 200) {
-            showToast('修改成功')
-            router.push('/team')
-        } else {
-            showToast(res.msg)
-        }
+        showToast('修改成功')
+        router.push('/team')
     })
 
 }
