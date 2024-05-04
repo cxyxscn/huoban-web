@@ -10,45 +10,45 @@
 
 登录注册：
 
-<img src="readme\Screenshot_2024-05-04-22-19-06-564_com.android.br.jpg" alt="Screenshot_2024-05-04-22-19-06-564_com.android.br" style="zoom: 25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-19-06-564_com.android.br.jpg" alt="Screenshot_2024-05-04-22-19-06-564_com.android.br" style="zoom: 25%;" />
 
-<img src="readme\Screenshot_2024-05-04-22-18-59-878_com.android.br.jpg" alt="Screenshot_2024-05-04-22-18-59-878_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-18-59-878_com.android.br.jpg" alt="Screenshot_2024-05-04-22-18-59-878_com.android.br" style="zoom:25%;" />
 
 首页
 
-<img src="readme\Screenshot_2024-05-04-22-25-09-844_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-09-844_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-09-844_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-09-844_com.android.br" style="zoom:25%;" />
 
 搜索用户
 
-<img src="readme\Screenshot_2024-05-04-22-25-48-948_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-48-948_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-48-948_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-48-948_com.android.br" style="zoom:25%;" />
 
 匹配模式
 
-<img src="readme\Screenshot_2024-05-04-22-25-21-013_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-21-013_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-21-013_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-21-013_com.android.br" style="zoom:25%;" />
 
 队伍
 
-<img src="readme\Screenshot_2024-05-04-22-25-15-339_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-15-339_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-15-339_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-15-339_com.android.br" style="zoom:25%;" />
 
 队伍详细
 
-<img src="readme\Screenshot_2024-05-04-22-31-57-014_com.android.br.jpg" alt="Screenshot_2024-05-04-22-31-57-014_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-31-57-014_com.android.br.jpg" alt="Screenshot_2024-05-04-22-31-57-014_com.android.br" style="zoom:25%;" />
 
 创建队伍
 
-<img src="readme\Screenshot_2024-05-04-22-25-33-268_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-33-268_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-33-268_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-33-268_com.android.br" style="zoom:25%;" />
 
 编辑队伍
 
-<img src="readme\Screenshot_2024-05-04-22-32-01-570_com.android.br.jpg" alt="Screenshot_2024-05-04-22-32-01-570_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-32-01-570_com.android.br.jpg" alt="Screenshot_2024-05-04-22-32-01-570_com.android.br" style="zoom:25%;" />
 
 个人中心
 
-<img src="readme\Screenshot_2024-05-04-22-25-17-842_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-17-842_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-17-842_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-17-842_com.android.br" style="zoom:25%;" />
 
 修改资料
 
-<img src="readme\Screenshot_2024-05-04-22-25-37-984_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-37-984_com.android.br" style="zoom:25%;" />
+<img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-25-37-984_com.android.br.jpg" alt="Screenshot_2024-05-04-22-25-37-984_com.android.br" style="zoom:25%;" />
 
 # 技术选型
 
