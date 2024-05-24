@@ -8,12 +8,12 @@
                 @load="userPage"
         >
             <template v-for="item in userList" :key="item.id">
-                <van-card class="user_info">
+                <van-card class="user-info">
                     <template #title>
-                        <div class="title">{{ item.nickname ? item.nickname : '伙伴匹配用户' }}</div>
+                        <div class="title">{{ item.nickname ? item.nickname : '用户' + item.account }}</div>
                     </template>
                     <template #thumb>
-                        <van-image :src="item.avatar?'/api' + item.avatar : '/api/images/avatar.png'"/>
+                        <van-image width="88" height="88" :src="item.avatar?'/api' + item.avatar : '/api/images/avatar.png'"/>
                     </template>
                     <template #tags>
                         <template v-for="(tag,index) in item.tags" :key="index">
@@ -25,6 +25,14 @@
                                 {{ tag }}
                             </van-tag>
                         </template>
+                        <van-tag
+                                v-if="item.tags.length === 0"
+                                plain size="large"
+                                type="primary"
+                                color="primary"
+                        >
+                            萌新
+                        </van-tag>
                     </template>
                     <template #footer>
                         <van-button size="small" type="primary" plain @click="contact(item)">立即联系</van-button>
@@ -86,7 +94,7 @@ const contact = (item) => {
 </script>
 
 <style lang="less" scoped>
-.user_info {
+.user-info {
   padding-bottom: 10px;
 
   .title {

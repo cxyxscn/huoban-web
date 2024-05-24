@@ -56,7 +56,7 @@
                     </van-button>
                 </template>
             </van-field>
-            <div class="tag_list">
+            <div class="tag-list">
                 <template v-for="(tag,index) in user.tags" :key="index">
                     <van-tag type="primary" plain style="margin: 2px" closeable @close="delTag(index)">
                         {{ tag }}
@@ -101,7 +101,7 @@
                 placeholder="（选填）请输入密码"
         />
 
-        <div class="btn_box">
+        <div class="btn-box">
             <van-button round block type="primary" native-type="submit">
                 提交
             </van-button>
@@ -119,7 +119,7 @@ import {showToast} from "vant";
 import {getCurrentUserApi, uploadApi, userSettingApi} from "../../api/system.ts";
 
 const router = useRouter()
-const file =ref()
+const file = ref()
 const user = ref({})
 
 const columns = ref([
@@ -203,11 +203,11 @@ const onSubmit = () => {
 </script>
 
 <style lang="less" scoped>
-.tag_list {
+.tag-list {
   padding: 10px 16px;
 }
 
-.btn_box {
+.btn-box {
   margin: 16px;
 
   button {

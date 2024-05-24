@@ -6,7 +6,7 @@
             <van-cell title="队伍类型" :value="team.status===0?'公开':'私密'"/>
             <van-cell title="创建用户">
                 <van-tag type="primary" plain>
-                    {{ team.createUser.nickname }}
+                    {{ team.createUser.nickname || '用户' + team.createUser.account }}
                 </van-tag>
             </van-cell>
             <van-cell title="队伍人数">
@@ -14,11 +14,11 @@
                     {{ team.users.length + 1 }}/{{ team.maxNum }}
                 </template>
             </van-cell>
-            <van-cell title="队伍成员">
+            <van-cell title="队伍成员" class="tags">
                 <template #label>
                     <van-tag v-for="(user,index) in team.users"
                              :key="index" type="primary" plain>
-                        {{ user.nickname }}
+                        {{ user.nickname || '用户' + user.account }}
                     </van-tag>
                 </template>
             </van-cell>
@@ -26,12 +26,12 @@
             <van-cell title="创建时间" :value="team.createTime"/>
             <van-cell title="更新时间" :value="team.updateTime"/>
         </van-cell-group>
-        <div class="btn_box">
+        <div class="btn-box">
             <van-button round block type="primary" @click="quitTeam">
                 退出队伍
             </van-button>
             <van-button round block type="primary" @click="router.push('/team')">
-                返回
+                返回列表
             </van-button>
         </div>
     </div>
@@ -56,23 +56,36 @@ const getTeam = () => {
     })
 }
 const quitTeam = () => {
-    teamQuitApi(teamId).then(res => {
-        if (res.code === 200) {
-            showToast('退出成功')
-            router.push('/team')
-        } else {
-            showToast(res.msg)
-        }
+    showConfirmDialog({
+        title: '提示',
+        message: '确认退出该队伍吗？（如果是队长，则队伍将被解散）',
+    }).then(() => {
+        teamQuitApi(teamId).then(res => {
+            if (res.code === 200) {
+                showToast('退出成功')
+                router.push('/team')
+            } else {
+                showToast(res.msg)
+            }
+        })
     })
 }
 </script>
 
 <style lang="less" scoped>
-.btn_box {
-  margin: 16px;
+.app-container {
+  .tags {
+    .van-tag {
+      margin-right: 5px;
+    }
+  }
 
-  button {
-    margin-bottom: 10px;
+  .btn-box {
+    margin: 16px;
+
+    button {
+      margin-bottom: 10px;
+    }
   }
 }
 </style>

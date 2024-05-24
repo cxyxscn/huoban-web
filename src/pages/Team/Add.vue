@@ -68,7 +68,7 @@
                 :rules="[{ required: true, message: '请输入队伍密码' }]"
         />
 
-        <div class="btn_box">
+        <div class="btn-box">
             <van-button round block type="primary" native-type="submit">
                 提交
             </van-button>
@@ -125,7 +125,7 @@ const onSubmit = () => {
 </script>
 
 <style lang="less" scoped>
-.btn_box {
+.btn-box {
   margin: 16px;
 
   button {
