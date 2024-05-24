@@ -8,9 +8,11 @@
 
 ## 效果展示
 
-登录注册：
+登录
 
 <img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-19-06-564_com.android.br.jpg" alt="Screenshot_2024-05-04-22-19-06-564_com.android.br" style="zoom: 25%;" />
+
+注册
 
 <img src="https://gitee.com/cxyxscn/huoban/raw/master/readme/Screenshot_2024-05-04-22-18-59-878_com.android.br.jpg" alt="Screenshot_2024-05-04-22-18-59-878_com.android.br" style="zoom:25%;" />
 
