@@ -6,9 +6,25 @@
 
 网址：https://hb.cxyxs.cn （推荐使用手机浏览）
 
-## 效果展示
+## 项目展示
 
-<img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-32-50-891_com.android.br.jpg" alt="首页" style="zoom:25%;" />
+<div align="center">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-32-50-891_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-32-55-905_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-32-59-725_com.android.br.jpg" width="30%">
+</div>
+
+<div align="center">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-33-10-186_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-33-14-239_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-33-21-779_com.android.br.jpg" width="30%">
+</div>
+
+<div align="center">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-33-29-644_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-34-44-516_com.android.br.jpg" width="30%">
+    <img src="https://gitee.com/cxyxscn/notes/raw/master/images/Screenshot_2024-05-25-15-34-48-517_com.android.br.jpg" width="30%">
+</div>
 
 ## 技术选型
 
