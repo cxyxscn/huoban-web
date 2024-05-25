@@ -1,47 +1,47 @@
 <template>
-   <div class="app=container">
-       <van-search
-           v-model="keyword"
-           placeholder="请输入搜索的标签"
-           @change="searchTags"
-           @clear="searchTags"
-       >
-       </van-search>
-       <van-divider content-position="left">已选标签</van-divider>
-       <div class="tags-box">
-           <div class="selected-box">
-               <van-tag
-                   closeable
-                   type="primary"
-                   size="large"
-                   v-for="(item,index) in selectTags"
-                   :key="index"
-                   @close="deleteTag(item)"
-               >
-                   {{ item.name }}
-               </van-tag>
-           </div>
-       </div>
+    <div class="app=container">
+        <van-search
+                v-model="keyword"
+                placeholder="请输入搜索的标签"
+                @change="searchTags"
+                @clear="searchTags"
+        >
+        </van-search>
+        <van-divider content-position="left">已选标签</van-divider>
+        <div class="tags-box">
+            <div class="selected-box">
+                <van-tag
+                        closeable
+                        type="primary"
+                        size="large"
+                        v-for="(item,index) in selectTags"
+                        :key="index"
+                        @close="deleteTag(item)"
+                >
+                    {{ item.name }}
+                </van-tag>
+            </div>
+        </div>
 
-       <van-divider content-position="left">可选标签</van-divider>
-       <div class="tags-box">
-           <div class="select-box">
-               <van-tag
-                   plain type="primary"
-                   size="large"
-                   v-for="(item,index) in tagsList"
-                   :key="index"
-                   @click="selectTag(item)"
-               >
-                   {{ item.name }}
-               </van-tag>
-           </div>
-       </div>
+        <van-divider content-position="left">可选标签</van-divider>
+        <div class="tags-box">
+            <div class="select-box">
+                <van-tag
+                        plain type="primary"
+                        size="large"
+                        v-for="(item,index) in tagsList"
+                        :key="index"
+                        @click="selectTag(item)"
+                >
+                    {{ item.name }}
+                </van-tag>
+            </div>
+        </div>
 
-       <div class="sub-btn">
-           <van-button type="primary" block @click="search">提交</van-button>
-       </div>
-   </div>
+        <div class="sub-btn">
+            <van-button type="primary" block @click="search">提交</van-button>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -63,7 +63,11 @@ onMounted(() => {
 
 const searchTags = () => {
     searchTagsApi(keyword.value).then(res => {
-        tagsList.value = res.data
+        if (res.code === 200) {
+            tagsList.value = res.data
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 

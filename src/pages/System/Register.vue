@@ -71,9 +71,13 @@ const onSubmit = () => {
         password: password.value,
         rePassword: rePassword.value
     }
-    registerApi(data).then(() => {
-        showToast('注册成功')
-        router.push('/login')
+    registerApi(data).then(res => {
+        if (res.code === 200) {
+            showToast('注册成功')
+            router.push('/login')
+        } else {
+            showToast(res.msg)
+        }
     })
 };
 </script>

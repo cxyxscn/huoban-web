@@ -133,27 +133,4 @@ const router = createRouter({
     routes,
 })
 
-// @ts-ignore
-router.beforeEach(async (to, from, next) => {
-    if (to.meta.title) {
-        document.title = to.meta.title as string
-    }
-    const res = await getCurrentUserApi();
-    if (res.code === 200) {
-        // 登录成功
-        if (to.path === '/login' || to.path === '/register') {
-            next('/home')
-        } else {
-            next()
-        }
-    } else {
-        // 未登录
-        if (to.path === '/login' || to.path === '/register') {
-            next()
-        } else {
-            next('/login')
-        }
-    }
-})
-
 export default router

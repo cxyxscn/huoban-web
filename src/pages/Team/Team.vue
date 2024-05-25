@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {teamJoinApi, teamPageApi} from "../../api/team.ts";
 import {useRoute, useRouter} from "vue-router";
 import TeamCard from "../../components/TeamCard.vue";
@@ -97,12 +97,16 @@ const onChange = () => {
 
 const getTeamPage = () => {
     teamPageApi(pageNum.value, pageSize.value, active.value, keyword).then(res => {
-        loading.value = false
-        total.value = res.data.total
-        teamList.value = [...teamList.value, ...res.data.records]
-        pageNum.value = pageNum.value + 1
-        if (teamList.value.length >= total.value) {
-            finished.value = true
+        if (res.code === 200) {
+            loading.value = false
+            total.value = res.data.total
+            teamList.value = [...teamList.value, ...res.data.records]
+            pageNum.value = pageNum.value + 1
+            if (teamList.value.length >= total.value) {
+                finished.value = true
+            }
+        } else {
+            showToast(res.msg)
         }
     })
 }

@@ -19,7 +19,11 @@ onMounted(() => {
 
 const getRecommendUsers = () => {
     recommendApi().then(res => {
-        userList.value = res.data
+        if (res.code === 200) {
+            userList.value = res.data
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 

@@ -66,7 +66,10 @@ const getCurrentUser = () => {
 
 const logout = () => {
     logoutApi().then(res => {
-        router.push("/login")
+        if (res.code === 200) {
+            showToast('退出登录成功')
+            router.push("/login")
+        }
     })
 }
 </script>

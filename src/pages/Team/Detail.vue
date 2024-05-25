@@ -52,7 +52,11 @@ onMounted(() => {
 
 const getTeam = () => {
     getTeamApi(teamId).then(res => {
-        team.value = res.data
+        if (res.code === 200) {
+            team.value = res.data
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 const quitTeam = () => {

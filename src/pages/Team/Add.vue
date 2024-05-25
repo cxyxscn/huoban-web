@@ -117,9 +117,12 @@ const onSubmit = () => {
         return
     }
     teamAddApi(team.value).then(res => {
-        router.push({
-            path: '/team'
-        })
+        if (res.code === 200) {
+            showToast('队伍创建成功')
+            router.push('/team')
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 </script>

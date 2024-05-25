@@ -114,14 +114,22 @@ const handleFileUpload = () => {
 
 const getTeam = () => {
     getTeamApi(teamId).then(res => {
-        team.value = res.data
-        team.value.expireTime = new Date(team.value.expireTime).toISOString().slice(0, 16)
+        if (res.code === 200) {
+            team.value = res.data
+            team.value.expireTime = new Date(team.value.expireTime).toISOString().slice(0, 16)
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 const onSubmit = () => {
     teamUpdateApi(team.value).then(res => {
-        showToast('修改成功')
-        router.push('/team')
+        if (res.code === 200) {
+            showToast('修改成功')
+            router.push('/team')
+        } else {
+            showToast(res.msg)
+        }
     })
 
 }

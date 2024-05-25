@@ -19,8 +19,9 @@ myAxios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 myAxios.interceptors.response.use(function (response) {
     const res = response.data
-    if (res.code !== 200) {
+    if (res.code === 406) {
         showToast(res.msg)
+        window.location.href = '/login'
     }
     return res
 }, function (error) {

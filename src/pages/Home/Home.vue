@@ -35,12 +35,16 @@ onMounted(
 
 const userPage = () => {
     userPageApi(pageNum.value, pageSize.value, tags).then(res => {
-        loading.value = false
-        total.value = res.data.total
-        userList.value = [...userList.value, ...res.data.records]
-        pageNum.value = pageNum.value + 1
-        if (userList.value.length >= total.value) {
-            finished.value = true
+        if (res.code === 200) {
+            loading.value = false
+            total.value = res.data.total
+            userList.value = [...userList.value, ...res.data.records]
+            pageNum.value = pageNum.value + 1
+            if (userList.value.length >= total.value) {
+                finished.value = true
+            }
+        } else {
+            showToast(res.msg)
         }
     })
 }

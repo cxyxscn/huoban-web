@@ -181,11 +181,13 @@ const onConfirm = ({selectedOptions}) => {
 
 const getCurrentUser = () => {
     getCurrentUserApi().then(res => {
-        user.value = res.data
-        if (user.value.gender === 0) {
-            fieldValue.value = '男生'
-        } else {
-            fieldValue.value = '女生'
+        if (res.code === 200) {
+            user.value = res.data
+            if (user.value.gender === 0) {
+                fieldValue.value = '男生'
+            } else {
+                fieldValue.value = '女生'
+            }
         }
     })
 }
