@@ -83,9 +83,12 @@ const joinTeamPre = (id, status) => {
 }
 
 const joinTeam = () => {
-    teamJoinApi(joinTeamData.value).then(() => {
-        showToast('加入成功')
-        router.push('/team')
+    teamJoinApi(joinTeamData.value).then((res) => {
+        if (res.code === 200) {
+            showToast('加入成功')
+        } else {
+            showToast(res.msg)
+        }
     })
 }
 
