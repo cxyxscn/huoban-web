@@ -19,17 +19,10 @@ myAxios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 myAxios.interceptors.response.use(function (response) {
     const res = response.data
-    if (res.code === 200) {
-        // 对响应数据做点什么
-        return res
-    } else {
-        if (res.code === 406) {
-            showToast('登录过期，请重新登录')
-            return res
-        }
+    if (res.code !== 200) {
         showToast(res.msg)
-        return Promise.reject(res.msg)
     }
+    return res
 }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error)

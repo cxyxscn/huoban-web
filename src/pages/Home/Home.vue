@@ -7,48 +7,8 @@
                 finished-text="没有更多了"
                 @load="userPage"
         >
-            <template v-for="item in userList" :key="item.id">
-                <van-card class="user-info">
-                    <template #title>
-                        <div class="title">{{ item.nickname ? item.nickname : '用户' + item.account }}</div>
-                    </template>
-                    <template #thumb>
-                        <van-image width="88" height="88" :src="item.avatar?'/api' + item.avatar : '/api/images/avatar.png'"/>
-                    </template>
-                    <template #tags>
-                        <template v-for="(tag,index) in item.tags" :key="index">
-                            <van-tag
-                                    plain size="large"
-                                    type="primary"
-                                    :color="item.gender===0?'primary':'red'"
-                            >
-                                {{ tag }}
-                            </van-tag>
-                        </template>
-                        <van-tag
-                                v-if="item.tags.length === 0"
-                                plain size="large"
-                                type="primary"
-                                color="primary"
-                        >
-                            萌新
-                        </van-tag>
-                    </template>
-                    <template #footer>
-                        <van-button size="small" type="primary" plain @click="contact(item)">立即联系</van-button>
-                    </template>
-                </van-card>
-            </template>
+            <UserCard v-for="item in userList" :key="item.id" :user="item"/>
         </van-list>
-
-        <van-popup
-                v-model:show="showBox"
-                position="center"
-                :style="{ width: '90%',padding:'10px',borderRadius:'5px' }"
-        >
-            <van-cell title="邮箱" :value="contactData.email"/>
-            <van-cell title="电话" :value="contactData.phone"/>
-        </van-popup>
     </div>
 </template>
 
@@ -56,55 +16,37 @@
 import {useRoute} from "vue-router"
 import {onMounted, ref} from "vue"
 import {userPageApi} from "../../api/user.ts"
+import UserCard from "../../components/UserCard.vue";
 
 const route = useRoute()
 const loading = ref(true)
 const finished = ref(false);
 const tags = route.query.tags || ''
 const userList = ref<userType[]>([])
-const showBox = ref(false)
-const contactData = ref({phone: '', email: ''})
 const pageNum = ref(1)
-const pageSize = ref(20)
+const pageSize = ref(10)
 const total = ref(0)
 
-onMounted(() => {
-    userPage()
-})
+onMounted(
+    () => {
+        userPage()
+    }
+)
 
 const userPage = () => {
-    if (loading.value) {
-        userPageApi(pageNum.value, pageSize.value, tags).then(res => {
-            loading.value = false
-            total.value = res.data.total
-            userList.value = [...userList.value, ...res.data.records]
-            pageNum.value = pageNum.value + 1
-            if (userList.value.length >= total.value) {
-                finished.value = true
-            }
-        })
-    }
+    userPageApi(pageNum.value, pageSize.value, tags).then(res => {
+        loading.value = false
+        total.value = res.data.total
+        userList.value = [...userList.value, ...res.data.records]
+        pageNum.value = pageNum.value + 1
+        if (userList.value.length >= total.value) {
+            finished.value = true
+        }
+    })
 }
 
-const contact = (item) => {
-    showBox.value = true
-    contactData.value.phone = item.phone
-    contactData.value.email = item.email
-}
 </script>
 
 <style lang="less" scoped>
-.user-info {
-  padding-bottom: 10px;
 
-  .title {
-    font-size: 20px;
-    font-weight: 700;
-    padding: 0 10px 5px 0;
-  }
-
-  .van-tag {
-    margin: 5px 10px 5px 0;
-  }
-}
 </style>

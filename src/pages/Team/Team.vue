@@ -70,10 +70,6 @@ const keyword = route.query.keyword || ''
 const show = ref(false)
 const joinTeamData = ref({})
 
-onMounted(() => {
-    getTeamPage()
-})
-
 const joinTeamPre = (id, status) => {
     joinTeamData.value = {
         teamId: id
@@ -94,27 +90,21 @@ const joinTeam = () => {
 }
 
 const onChange = () => {
-    console.log(active.value)
     teamList.value = []
     finished.value = false
     pageNum.value = 1
-    getTeamPage()
 }
 
 const getTeamPage = () => {
-    if (loading.value) {
-        teamPageApi(pageNum.value, pageSize.value, active.value, keyword).then(res => {
-            if (res.code === 200) {
-                loading.value = false
-                total.value = res.data.total
-                teamList.value = [...teamList.value, ...res.data.records]
-                pageNum.value = pageNum.value + 1
-                if (teamList.value.length >= total.value) {
-                    finished.value = true
-                }
-            }
-        })
-    }
+    teamPageApi(pageNum.value, pageSize.value, active.value, keyword).then(res => {
+        loading.value = false
+        total.value = res.data.total
+        teamList.value = [...teamList.value, ...res.data.records]
+        pageNum.value = pageNum.value + 1
+        if (teamList.value.length >= total.value) {
+            finished.value = true
+        }
+    })
 }
 
 </script>

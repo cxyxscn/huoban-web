@@ -16,10 +16,12 @@
 </template>
 
 <script setup lang="ts">
+import {defineProps, PropType} from "vue";
 
 defineProps({
     team: {
-        type: Object,
+        type: Object as PropType<teamType>,
+        required: true
     }
 })
 

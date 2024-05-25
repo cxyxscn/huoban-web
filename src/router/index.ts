@@ -133,6 +133,7 @@ const router = createRouter({
     routes,
 })
 
+// @ts-ignore
 router.beforeEach(async (to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title as string
